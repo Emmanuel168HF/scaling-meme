@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda de Abarrotes "MCFUN"</title>
+</head>
+<body>
+    <script>
+        //Array para almacenar los productos solicitados
+        var productos = [];
+
+        //Función para solicitar la sección de la tienda
+        function seleccionarSeccion() {
+            var seccion = parseInt(prompt("Selecciona la sección de la tienda:\n1. Frutas\n2. Verduras\n3. Lácteos\n4. Carnes\n5. Secos y Enlatados"));
+
+            //Validar la selección de sección
+            switch (seccion) {
+                case 1:
+                    return "frutas";
+                case 2:
+                    return "verduras";
+                case 3:
+                    return "lacteos";
+                case 4:
+                    return "carnes";
+                case 5:
+                    return "secos y enlatados";
+                default:
+                    alert("Selecciona una opción válida.");
+                    return seleccionarSeccion(); // Volver a solicitar la sección
+            }
+        }
+
+        //Función para solicitar el producto dentro de la sección seleccionada
+        function solicitarProducto(seccion) {
+            var producto = {};
+
+            //Seleccionar el producto según la sección
+            switch (seccion.toLowerCase()) {
+                case "frutas":
+                    producto = seleccionarFruta();
+                    break;
+                case "verduras":
+                    producto = seleccionarVerdura();
+                    break;
+                case "lacteos":
+                    producto = seleccionarLacteo();
+                    break;
+                case "carnes":
+                    producto = seleccionarCarne();
+                    break;
+                case "secos y enlatados":
+                    producto = seleccionarSecoEnlatado();
+                    break;
+            }
+
+            //Solicitar cantidad del producto
+            do {
+                producto.cantidad = parseInt(prompt("Ingresa la cantidad que deseas comprar de '" + producto.nombre + "':"));
+
+                //Validar que la cantidad sea un número válido
+                if (isNaN(producto.cantidad) || producto.cantidad <= 0) {
+                    alert("La cantidad ingresada no es válida. Por favor, intenta de nuevo.");
+                }
+            } while (isNaN(producto.cantidad) || producto.cantidad <= 0);
+
+            //Calcular subtotal del producto
+            producto.subtotal = producto.cantidad * producto.precioUnitario;
+
+            //Agregar producto al array de productos
+            productos.push(producto);
+
+            //Preguntar si quiere agregar otro producto
+            var respuesta = confirm("¿Deseas agregar otro producto de la sección '" + seccion + "'?");
+            if (respuesta) {
+                solicitarProducto(seccion); // Volver a solicitar otro producto de la misma sección
+            }
+        }
+
+        //Funciones para seleccionar productos de cada sección
+        function seleccionarFruta() {
+            var producto = {};
+            var seleccion = parseInt(prompt("Selecciona el producto:\n1. Manzanas\n2. Naranjas\n3. Plátanos\n4. Mango\n5. Piña\n6. Kiwi\n7. Bayas\n8. Uvas"));
+
+            switch (seleccion) {
+                case 1:
+                    producto.nombre = "Manzanas";
+                    producto.precioUnitario = 5.00;
+                    break;
+                case 2:
+                    producto.nombre = "Naranjas";
+                    producto.precioUnitario = 4.50;
+                    break;
+                case 3:
+                    producto.nombre = "Plátanos";
+                    producto.precioUnitario = 3.50;
+                    break;
+                case 4:
+                    producto.nombre = "Mango";
+                    producto.precioUnitario = 6.00;
+                    break;
+                case 5:
+                    producto.nombre = "Piña";
+                    producto.precioUnitario = 5.00;
+                    break;
+                case 6:
+                    producto.nombre = "Kiwi";
+                    producto.precioUnitario = 2.00;
+                    break;
+                case 7:
+                    producto.nombre = "Bayas";
+                    producto.precioUnitario = 8.00;
+                    break;
+                case 8:
+                    producto.nombre = "Uvas";
+                    producto.precioUnitario = 10.00;
+                    break;
+                default:
+                    alert("Selecciona una opción válida.");
+                    return seleccionarFruta();// Volver a solicitar la selección
+            }
+
+            return producto;
+        }
+
+        function seleccionarVerdura() {
+            var producto = {};
+            var seleccion = parseInt(prompt("Selecciona el producto:\n1. Lechuga\n2. Tomate\n3. Zanahorias\n4. Cebollas\n5. Pepinos\n6. Espinacas\n7. Calabacín\n8. Brócoli"));
+
+            switch (seleccion) {
+                case 1:
+                    producto.nombre = "Lechuga";
+                    producto.precioUnitario = 2.00;
+                    break;
+                case 2:
+                    producto.nombre = "Tomate";
+                    producto.precioUnitario = 3.00;
+                    break;
+                case 3:
+                    producto.nombre = "Zanahorias";
+                    producto.precioUnitario = 2.50;
+                    break;
+                case 4:
+                    producto.nombre = "Cebollas";
+                    producto.precioUnitario = 2.00;
+                    break;
+                case 5:
+                    producto.nombre = "Pepinos";
+                    producto.precioUnitario = 2.50;
+                    break;
+                case 6:
+                    producto.nombre = "Espinacas";
+                    producto.precioUnitario = 4.00;
+                    break;
+                case 7:
+                    producto.nombre = "Calabacín";
+                    producto.precioUnitario = 3.00;
+                    break;
+                case 8:
+                    producto.nombre = "Brócoli";
+                    producto.precioUnitario = 3.50;
+                    break;
+                default:
+                    alert("Selecciona una opción válida.");
+                    return seleccionarVerdura(); // Volver a solicitar la selección
+            }
+
+            return producto;
+        }
+
+        function seleccionarLacteo() {
+            var producto = {};
+            var seleccion = parseInt(prompt("Selecciona el producto:\n1. Leche\n2. Queso\n3. Yogur\n4. Mantequilla\n5. Crema\n6. Flan\n7. Helado\n8. Batido"));
+
+            switch (seleccion) {
+                case 1:
+                    producto.nombre = "Leche";
+                    producto.precioUnitario = 20.00;
+                    break;
+                case 2:
+                    producto.nombre = "Queso";
+                    producto.precioUnitario = 30.00;
+                    break;
+                case 3:
+                    producto.nombre = "Yogur";
+                    producto.precioUnitario = 15.00;
+                    break;
+                case 4:
+                    producto.nombre = "Mantequilla";
+                    producto.precioUnitario = 25.00;
+                    break;
+                case 5:
+                    producto.nombre = "Crema";
+                    producto.precioUnitario = 18.00;
+                    break;
+                case 6:
+                    producto.nombre = "Flan";
+                    producto.precioUnitario = 10.00;
+                    break;
+                case 7:
+                    producto.nombre = "Helado";
+                    producto.precioUnitario = 12.00;
+                    break;
+                case 8:
+                    producto.nombre = "Batido";
+                    producto.precioUnitario = 25.00;
+                    break;
+                default:
+                    alert("Selecciona una opción válida.");
+                    return seleccionarLacteo(); // Volver a solicitar la selección
+            }
+
+            return producto;
+        }
+
+        function seleccionarCarne() {
+            var producto = {};
+            var seleccion = parseInt(prompt("Selecciona el producto:\n1. Carne de res\n2. Pollo\n3. Cerdo\n4. Pescado\n5. Ternera\n6. Cordero\n7. Salchichas\n8. Jamón"));
+
+            switch (seleccion) {
+                case 1:
+                    producto.nombre = "Carne de res";
+                    producto.precioUnitario = 50.00;
+                    break;
+                case 2:
+                    producto.nombre = "Pollo";
+                    producto.precioUnitario = 40.00;
+                    break;
+                case 3:
+                    producto.nombre = "Cerdo";
+                    producto.precioUnitario = 45.00;
+                    break;
+                case 4:
+                    producto.nombre = "Pescado";
+                    producto.precioUnitario = 60.00;
+                    break;
+                case 5:
+                    producto.nombre = "Ternera";
+                    producto.precioUnitario = 55.00;
+                    break;
+                case 6:
+                    producto.nombre = "Cordero";
+                    producto.precioUnitario = 65.00;
+                    break;
+                case 7:
+                    producto.nombre = "Salchichas";
+                    producto.precioUnitario = 30.00;
+                    break;
+                case 8:
+                    producto.nombre = "Jamón";
+                    producto.precioUnitario = 35.00;
+                    break;
+                default:
+                    alert("Selecciona una opción válida.");
+                    return seleccionarCarne(); // Volver a solicitar la selección
+            }
+
+            return producto;
+        }
+
+        function seleccionarSecoEnlatado() {
+            var producto = {};
+            var seleccion = parseInt(prompt("Selecciona el producto:\n1. Arroz\n2. Frijoles\n3. Atún en lata\n4. Sardinas en lata\n5. Pasta\n6. Aceitunas\n7. Maíz enlatado\n8. Salsa de tomate"));
+
+            switch (seleccion) {
+                case 1:
+                    producto.nombre = "Arroz";
+                    producto.precioUnitario = 15.00;
+                    break;
+                case 2:
+                    producto.nombre = "Frijoles";
+                    producto.precioUnitario = 12.00;
+                    break;
+                case 3:
+                    producto.nombre = "Atún en lata";
+                    producto.precioUnitario = 18.00;
+                    break;
+                case 4:
+                    producto.nombre = "Sardinas en lata";
+                    producto.precioUnitario = 20.00;
+                    break;
+                case 5:
+                    producto.nombre = "Pasta";
+                    producto.precioUnitario = 10.00;
+                    break;
+                case 6:
+                    producto.nombre = "Aceitunas";
+                    producto.precioUnitario = 25.00;
+                    break;
+                case 7:
+                    producto.nombre = "Maíz enlatado";
+                    producto.precioUnitario = 16.00;
+                    break;
+                case 8:
+                    producto.nombre = "Salsa de tomate";
+                    producto.precioUnitario = 22.00;
+                    break;
+                default:
+                    alert("Selecciona una opción válida.");
+                    return seleccionarSecoEnlatado(); // Volver a solicitar la selección
+            }
+
+            return producto;
+        }
+        // Iniciar proceso de solicitud de productos
+        var seccionSeleccionada = seleccionarSeccion();
+        solicitarProducto(seccionSeleccionada);
+
+        // Mostrar resumen de la compra y redireccionar al index.html
+        if (productos.length > 0) {
+            var resumenCompra = "Resumen de la compra:\n\n";
+            var totalCompra = 0;
+
+            for (var i = 0; i < productos.length; i++) {
+                resumenCompra += "Producto: " + productos[i].nombre + "\n";
+                resumenCompra += "Cantidad: " + productos[i].cantidad + "\n";
+                resumenCompra += "Precio unitario: $" + productos[i].precioUnitario.toFixed(2) + "\n";
+                resumenCompra += "Subtotal: $" + productos[i].subtotal.toFixed(2) + "\n\n";
+
+                totalCompra += productos[i].subtotal;
+            }
+
+            resumenCompra += "Total de la compra: $" + totalCompra.toFixed(2);
+            alert(resumenCompra);
+        }
+
+        // Redireccionar al index.html
+        window.location.href = "index.html";
+    </script>
+</body>
+</html>

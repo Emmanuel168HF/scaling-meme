@@ -1,0 +1,15 @@
+#botonForm1{
+    background-color:rgb(14, 14, 231);
+    color: white;
+    border: none;
+    padding: 40px 80px;
+    border-radius: 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+}
+#botonform1:hover{
+    background-color: aqua;
+}
